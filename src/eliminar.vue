@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <a href="#" @click.stop="eliminar(id)"><i class="fas fa-trash-alt"></i></a>
+
   </div>
 </template>
 
@@ -13,8 +13,8 @@
       };
     },
     methods:{
-        eliminar(id){
-            alert(id)
+          borrar(id){
+               this.$emit("borrar",{id:id})
         }
     },
     mounted:function(){

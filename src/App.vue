@@ -8,7 +8,7 @@
         <button v-on:click=add_list class="mt-2 mb-5 btn btn-secondary btn-sm"> Crear </button>
         <h5><u>Lista</u></h5>
         <ul class="px-0">
-            <li v-for="skill in skills" :key="skill.id">{{skill}}<eliminar v-bind:key="skill.id" id="skill.id"></eliminar></li>
+            <li v-for="(skill, index) in skills" :key="skill.id">{{skill}}<a href="#" @click="borrar(index)"><i class="fas fa-trash-alt"></i></a></li>
         </ul>
     </div>
   </div>
@@ -30,12 +30,18 @@ import eliminar from "./eliminar.vue"
     },
     components:{eliminar},
     methods:{
-        add_list: function () { 
+        add_list: function (skill, index) { 
             if(this.skill != ""){
             this.skills.push(this.skill)
             this.skill="";
             }
-        }
+        },
+         borrar(id){
+               this.$emit("borrar",{id:id})
+            //    let id= e.id
+            //    let index=this.skills.findIndex((skill)=>skill.id===id);
+               this.skills.splice(this.index,1);
+        },
     }
   }
 </script>
