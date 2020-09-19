@@ -1,21 +1,29 @@
 <template>
   <div id="app">
-
+    <a href="#" @click="borrar(id)">
+        <i class="fas fa-trash-alt"></i>
+    </a>
   </div>
 </template>
 
 <script>
   export default {
     name: "eliminar",
+    props:{
+      id:{
+          type:Number,
+          required:true,
+      },
+    },
     data() {
       return {
         message: ""
       };
     },
     methods:{
-          borrar(id){
-               this.$emit("borrar",{id:id})
-        }
+        borrar(id){
+        this.$emit("borrar",{id:id})
+        },
     },
     mounted:function(){
        // this.count()

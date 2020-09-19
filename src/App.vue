@@ -8,7 +8,17 @@
         <button v-on:click=add_list class="mt-2 mb-5 btn btn-secondary btn-sm"> Crear </button>
         <h5><u>Lista</u></h5>
         <ul class="px-0">
-            <li v-for="(skill, index) in skills" :key="skill.id">{{skill}}<a href="#" @click="borrar(index)"><i class="fas fa-trash-alt"></i></a></li>
+            <li v-for="(skill, index) in skills"
+                :skill="skill" 
+                :index="index"
+                :key="skill.id" 
+                >
+                    {{skill}}
+                    <componente-eliminar :id="index" @borrar="borrar_skill"></componente-eliminar>
+                    <!--<a href="#" @click="borrar(index)">
+                        <i class="fas fa-trash-alt"></i>
+                    </a>!-->
+            </li>
         </ul>
     </div>
   </div>
@@ -16,11 +26,7 @@
 <script>
 import eliminar from "./eliminar.vue"
   export default {
-    props:{
-        id:Number,
-        require: true,
-    },
-    data() {
+      data() {
       return {
 
         message: "Crea una nueva tarea",
@@ -28,7 +34,9 @@ import eliminar from "./eliminar.vue"
         skill:"",
     };
     },
-    components:{eliminar},
+    components:{
+      'componente-eliminar':eliminar,
+      },
     methods:{
         add_list: function (skill, index) { 
             if(this.skill != ""){
@@ -36,12 +44,12 @@ import eliminar from "./eliminar.vue"
             this.skill="";
             }
         },
-         borrar(id){
-               this.$emit("borrar",{id:id})
-            //    let id= e.id
-            //    let index=this.skills.findIndex((skill)=>skill.id===id);
-               this.skills.splice(this.index,1);
-        },
+        borrar_skill(e){
+          console.log(e,"evento")
+          let id= e.id
+          let index=this.skills.findIndex((skill)=>skill.id===id);
+          this.skills.splice(index,1)
+        }
     }
   }
 </script>
