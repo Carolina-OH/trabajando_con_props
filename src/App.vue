@@ -48,7 +48,8 @@ import eliminar from "./eliminar.vue"
           console.log(e,"evento")
           let id= e.id
           let index=this.skills.findIndex((skill)=>skill.id===id);
-          this.skills.splice(index,1)
+          console.log(id)
+          this.skills.splice(id,1)
         }
     }
   }
